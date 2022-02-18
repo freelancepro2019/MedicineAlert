@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/fragmentHome"
+    >
+
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.app.medicinealert.uis.activity_home.fragments.FragmentHome"
+        tools:layout="@layout/fragment_home"
+        android:label=""
+
+        />
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="com.app.medicinealert.uis.activity_home.fragments.FragmentProfile"
+        android:label=""
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/fragmentMedicine"
+        android:name="com.app.medicinealert.uis.activity_home.fragments.FragmentMedicines"
+        android:label=""
+        tools:layout="@layout/fragment_medicines" />
+</navigation>

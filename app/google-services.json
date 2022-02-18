@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1032141176883",
+    "project_id": "medicinealert-a8f7d",
+    "storage_bucket": "medicinealert-a8f7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032141176883:android:29aedcb395ddda3f9e2346",
+        "android_client_info": {
+          "package_name": "com.app.medicinealert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032141176883-iimohf5tdhn9com0ndm7uq2l6k2pih0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmoHOZDT41jqjvYaJwid-6-S1Yy7H5xv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032141176883-iimohf5tdhn9com0ndm7uq2l6k2pih0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

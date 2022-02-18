@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="model"
+            type="com.app.medicinealert.models.LoginModel" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:background="@color/white"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".uis.activity_login.LoginActivity"
+                android:padding="16dp"
+                >
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias=".1"
+                    android:textColor="@color/black"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:text="@string/log_in"
+                    />
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias=".3"
+                    >
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:background="@drawable/small_stroke_gray"
+                        app:hintEnabled="false"
+                        app:errorEnabled="false"
+                        app:startIconDrawable="@drawable/ic_mail"
+                        app:startIconTint="@color/gray4"
+                        >
+
+
+
+                        <EditText
+                            android:id="@+id/edtEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:lines="1"
+                            android:hint="@string/email_address"
+                            android:textColorHint="@color/gray4"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:gravity="start|center_vertical"
+                            android:textAlignment="viewStart"
+                            android:inputType="textEmailAddress"
+                            android:text="@={model.email}"
+                            error="@{model.error_email}"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:background="@drawable/small_stroke_gray"
+                        app:hintEnabled="false"
+                        app:errorEnabled="false"
+                        app:startIconDrawable="@drawable/ic_lock"
+                        app:startIconTint="@color/gray4"
+                        android:layout_marginTop="12dp"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/colorPrimary"
+                        >
+                        <EditText
+                            android:id="@+id/edtPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/transparent"
+                            android:lines="1"
+                            android:hint="@string/password"
+                            android:textColorHint="@color/gray4"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:gravity="start|center_vertical"
+                            android:textAlignment="viewStart"
+                            android:inputType="textPassword"
+                            android:text="@={model.password}"
+                            error="@{model.error_password}"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <Button
+                        android:id="@+id/btnLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/small_rounded_primary"
+                        android:layout_marginTop="36dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:text="@string/log_in"
+                        />
+
+
+                    <LinearLayout
+                        android:id="@+id/llSignUp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="48dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gray5"
+                            android:textSize="12sp"
+                            android:text="@string/don_t_have_an_account_yet"
+                            />
+
+                        <androidx.legacy.widget.Space
+                            android:layout_width="8dp"
+                            android:layout_height="0dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp"
+                            android:text="@string/sign_up"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
