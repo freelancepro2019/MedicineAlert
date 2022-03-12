@@ -178,6 +178,7 @@
 
                     </LinearLayout>
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tiEmail"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:paddingStart="5dp"
@@ -211,6 +212,7 @@
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tiPassword"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:paddingStart="5dp"

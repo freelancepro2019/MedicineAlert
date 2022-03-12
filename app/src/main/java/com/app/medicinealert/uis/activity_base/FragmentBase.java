@@ -21,7 +21,7 @@ public class FragmentBase extends Fragment {
 
     protected String getLang() {
         Paper.init(context);
-        String lang = Paper.book().read("lang", "ar");
+        String lang = Paper.book().read("lang", "en");
         return lang;
     }
 

@@ -1,10 +1,17 @@
 package com.app.medicinealert.uis.activity_home.fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -18,21 +25,29 @@ import com.app.medicinealert.databinding.FragmentHomeBinding;
 import com.app.medicinealert.databinding.FragmentProfileBinding;
 import com.app.medicinealert.uis.activity_base.FragmentBase;
 import com.app.medicinealert.uis.activity_home.HomeActivity;
+import com.app.medicinealert.uis.activity_sign_up.SignUpActivity;
 
 public class FragmentProfile extends FragmentBase {
     private FragmentProfileBinding binding;
     private HomeActivity activity;
+    private ActivityResultLauncher<Intent> launcher;
+    private int req;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         activity = (HomeActivity) context;
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
+                binding.setModel(getUserModel());
+            }
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_profile,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         return binding.getRoot();
     }
 
@@ -55,6 +70,12 @@ public class FragmentProfile extends FragmentBase {
 
         binding.llMedicine.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.fragmentMedicine);
+        });
+
+        binding.llEditProfile.setOnClickListener(view -> {
+            req = 1;
+            Intent intent = new Intent(activity, SignUpActivity.class);
+            launcher.launch(intent);
         });
     }
 }

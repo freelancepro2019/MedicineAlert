@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -78,40 +79,44 @@ public class FragmentMedicines extends FragmentBase {
         binding.tvNoData.setVisibility(View.GONE);
         binding.swipeRefresh.setRefreshing(true);
         dRef = FirebaseDatabase.getInstance().getReference();
-        dRef.child(Tags.table_medicines)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        binding.swipeRefresh.setRefreshing(false);
-                        list.clear();
-                        adapter.updateList(list);
+        Query dRefSync = dRef.child(Tags.table_medicines).orderByChild("user_id")
+                .equalTo(getUserModel().getUser_id());
 
-                        if (snapshot.getValue() != null) {
-                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                MedicineModel model = ds.getValue(MedicineModel.class);
-                                if (model != null && model.getUser_id().equals(getUserModel().getUser_id())) {
-                                    list.add(model);
-                                }
-                            }
-                            if (list.size() == 0) {
-                                binding.tvNoData.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.tvNoData.setVisibility(View.GONE);
-                            }
-                            adapter.updateList(list);
+        dRefSync.keepSynced(true);
+        dRefSync.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                binding.swipeRefresh.setRefreshing(false);
+                list.clear();
+                adapter.updateList(list);
 
-                        } else {
-                            list.clear();
-                            adapter.updateList(list);
-                            binding.tvNoData.setVisibility(View.VISIBLE);
+                if (snapshot.getValue() != null) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        MedicineModel model = ds.getValue(MedicineModel.class);
+
+                        if (model != null) {
+                            list.add(model);
                         }
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
+                    if (list.size() == 0) {
+                        binding.tvNoData.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.tvNoData.setVisibility(View.GONE);
                     }
-                });
+                    adapter.updateList(list);
+
+                } else {
+                    list.clear();
+                    adapter.updateList(list);
+                    binding.tvNoData.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void edit(MedicineModel model) {

@@ -25,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends ActivityBase {
@@ -92,14 +93,19 @@ public class LoginActivity extends ActivityBase {
     }
 
     private void getUserById(String user_id, ProgressDialog dialog) {
+
         dRef = FirebaseDatabase.getInstance().getReference();
-        dRef.child(Tags.table_patients);
-        dRef.child(user_id).addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = dRef.child(Tags.table_patients)
+                .orderByChild("user_id")
+                .equalTo(user_id);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 dialog.dismiss();
                 if (snapshot.getValue() != null) {
-                    UserModel userModel = snapshot.getValue(UserModel.class);
+                    UserModel userModel = snapshot.child(user_id).getValue(UserModel.class);
                     if (userModel != null) {
                         setUserModel(userModel);
                         navigateToHomeActivity();
@@ -110,14 +116,16 @@ public class LoginActivity extends ActivityBase {
                     Toast.makeText(LoginActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
 
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-                Log.e("error_login", error.getMessage());
             }
         });
+
+
     }
 
     private void navigateToHomeActivity() {
