@@ -20,6 +20,7 @@ public class Preferences {
         }
         return instance;
     }
+
     public UserModel getUserData(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -28,15 +29,30 @@ public class Preferences {
         return userModel;
     }
 
-    public void createUpdateUserData(Context context,UserModel userModel) {
+
+    public void createUpdateUserData(Context context, UserModel userModel) {
         SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String user_data = gson.toJson(userModel);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("user_data",user_data);
+        editor.putString("user_data", user_data);
         editor.apply();
 
     }
+
+    public void setShowNotification(Context context, boolean canShow) {
+        SharedPreferences preferences = context.getSharedPreferences("notification", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("show", canShow);
+        editor.apply();
+
+    }
+
+    public boolean getShowNotification(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("notification", Context.MODE_PRIVATE);
+        return preferences.getBoolean("show", false);
+    }
+
 
     public void clearUserData(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -44,12 +60,12 @@ public class Preferences {
         editor.clear();
         editor.apply();
 
+        SharedPreferences preferences2 = context.getSharedPreferences("notification", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = preferences2.edit();
+        editor2.clear();
+        editor2.apply();
+
     }
-
-
-
-
-
 
 
 }

@@ -9,8 +9,9 @@ import androidx.room.RoomDatabase;
 import com.app.medicinealert.models.AlarmModel;
 
 
-@Database(entities = {AlarmModel.class},version = 1)
+@Database(entities = {AlarmModel.class},version = 1,exportSchema = false)
 public abstract class MedicineAlertDataBase extends RoomDatabase {
+
     private static MedicineAlertDataBase instance = null;
     public abstract DAO getDAO();
 

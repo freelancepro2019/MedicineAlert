@@ -48,6 +48,7 @@
                 android:padding="16dp"
                 >
                 <LinearLayout
+                    android:id="@+id/llTime"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:orientation="horizontal"
@@ -67,6 +68,7 @@
                         android:layout_width="8dp"
                         android:layout_height="0dp"/>
                     <TextView
+                        android:id="@+id/tvTime"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
@@ -78,6 +80,7 @@
                 </LinearLayout>
 
                 <EditText
+                    android:id="@+id/edtNote"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:background="@drawable/small_stroke_gray"
@@ -105,23 +108,32 @@
 
                 </FrameLayout>
 
-                <TextView
+
+
+                <CheckBox
+                    android:id="@+id/cbRecurring"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:text="@string/repeat"
+                    android:buttonTint="@color/colorPrimary"
+                    android:layout_marginTop="8dp"
                     />
                 <LinearLayout
+                    android:id="@+id/llDays"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
                     android:layout_marginTop="12dp"
+                    android:visibility="gone"
                     >
                     <CheckBox
+                        android:id="@+id/cbSat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"
@@ -134,6 +146,7 @@
 
                         />
                     <CheckBox
+                        android:id="@+id/cbSun"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"
@@ -147,6 +160,7 @@
 
                         />
                     <CheckBox
+                        android:id="@+id/cbMon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"
@@ -160,6 +174,7 @@
 
                         />
                     <CheckBox
+                        android:id="@+id/cbTus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"
@@ -173,6 +188,7 @@
 
                         />
                     <CheckBox
+                        android:id="@+id/cbWed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"
@@ -186,6 +202,7 @@
 
                         />
                     <CheckBox
+                        android:id="@+id/cbThu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"
@@ -199,6 +216,7 @@
 
                         />
                     <CheckBox
+                        android:id="@+id/cbFri"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"

@@ -18,12 +18,12 @@
     <string name="error">Error</string>
     <string name="cancel">Cancel</string>
     <string name="error_msg">Error! Please try again later</string>
-    <string name="alerts">Alerts</string>
+    <string name="alerts">Alarms</string>
     <string name="add_alarm">Add Alarm</string>
     <string name="time">time</string>
     <string name="date">date</string>
     <string name="note">note</string>
-    <string name="repeat">repeat</string>
+    <string name="repeat">Recurring</string>
     <string name="every_saturday">Every Saturday</string>
     <string name="every_sunday">Every Sunday</string>
     <string name="every_monday">Every Monday</string>
@@ -44,4 +44,9 @@
     <string name="wait">Wait...</string>
     <string name="suc">Done successfully!</string>
     <string name="medicines">Medicines</string>
+    <string name="alarm_time">Alarm time</string>
+    <string name="select">Select</string>
+    <string name="ch_re_days">Choose recurring days</string>
+    <string name="ch_medicine">Please choose medicine</string>
+    <string name="update">Update</string>
 </resources>
