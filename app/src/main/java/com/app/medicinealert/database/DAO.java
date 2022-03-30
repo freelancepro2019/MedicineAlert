@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.app.medicinealert.models.AlarmModel;
+import com.app.medicinealert.models.ReportModel;
 import com.app.medicinealert.models.UserModel;
 
 import java.util.List;
@@ -28,4 +29,12 @@ public interface DAO {
 
     @Query("SELECT * FROM alarm_table WHERE user_id=:user_id ORDER BY alarm_id ASC")
     Single<List<AlarmModel>> getMyAlarm(String user_id);
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable insertReport(ReportModel model);
+
+    @Query("SELECT * FROM table_report WHERE user_id=:user_id ")
+    Single<List<ReportModel>> getReports(String user_id);
+
 }

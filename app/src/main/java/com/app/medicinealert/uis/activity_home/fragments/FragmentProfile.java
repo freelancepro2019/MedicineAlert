@@ -72,6 +72,10 @@ public class FragmentProfile extends FragmentBase {
             Navigation.findNavController(view).navigate(R.id.fragmentMedicine);
         });
 
+        binding.llReports.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.fragmentReports);
+        });
+
         binding.llEditProfile.setOnClickListener(view -> {
             req = 1;
             Intent intent = new Intent(activity, SignUpActivity.class);

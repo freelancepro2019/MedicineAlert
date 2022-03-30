@@ -78,6 +78,7 @@ public class AlarmModel implements Serializable {
         intent.putExtra(AlarmReceiver.NOTE, note);
         intent.putExtra(AlarmReceiver.USER_ID, user_id);
         intent.putExtra(AlarmReceiver.ALARM_ID, alarm_id);
+        intent.putExtra(AlarmReceiver.MEDICINE_ID, medicine_id);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarm_id,intent,0);
 

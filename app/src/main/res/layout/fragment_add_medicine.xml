@@ -95,6 +95,7 @@
                     android:textSize="14sp"
                     android:padding="16dp"
                     android:textColor="@color/black"
+                    android:inputType="number"
                     android:hint="@string/dosage"
                     android:text="@={model.dosage}"
                     error="@{model.error_dosage}"

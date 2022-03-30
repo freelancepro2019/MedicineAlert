@@ -23,4 +23,10 @@
         android:name="com.app.medicinealert.uis.activity_home.fragments.FragmentMedicines"
         android:label=""
         tools:layout="@layout/fragment_medicines" />
+
+    <fragment
+        android:id="@+id/fragmentReports"
+        android:name="com.app.medicinealert.uis.activity_home.fragments.FragmentReports"
+        android:label=""
+        tools:layout="@layout/fragment_reports" />
 </navigation>

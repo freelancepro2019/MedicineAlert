@@ -49,4 +49,8 @@
     <string name="ch_re_days">Choose recurring days</string>
     <string name="ch_medicine">Please choose medicine</string>
     <string name="update">Update</string>
+    <string name="done">done</string>
+    <string name="total">Total dosage:</string>
+    <string name="no_reports_to_show">No reports to show</string>
+    <string name="reports">Reports</string>
 </resources>

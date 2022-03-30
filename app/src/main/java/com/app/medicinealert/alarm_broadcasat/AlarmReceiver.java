@@ -1,10 +1,13 @@
 package com.app.medicinealert.alarm_broadcasat;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.PowerManager;
 import android.util.Log;
+import android.view.Window;
 
 import com.app.medicinealert.mvvm.AlarmRepository;
 import com.app.medicinealert.services.AlarmService;
@@ -29,6 +32,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public static final String NOTE = "note";
     public static final String USER_ID = "user_id";
     public static final String ALARM_ID = "alarm_id";
+    public static final String MEDICINE_ID = "medicine_id";
 
 
     @Override
@@ -38,11 +42,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         } else {
             if (intent.getBooleanExtra(RECURRING, false)) {
                 if (alarmIsToday(intent)) {
-                    Log.e("2", "2");
                     startAlarmService(intent, context);
                 }
             } else {
-                Log.e("1", "1");
                 startAlarmService(intent, context);
 
             }
@@ -93,7 +95,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         String time = intent.getStringExtra(TIME);
         String note = intent.getStringExtra(NOTE);
         String user_id = intent.getStringExtra(USER_ID);
+        String medicine_id = intent.getStringExtra(MEDICINE_ID);
+
         int alarm_id = intent.getIntExtra(ALARM_ID,0);
+
+
+        // Put here YOUR code.
+
+
 
 
         Intent intentService = new Intent(context, AlarmService.class);
@@ -103,8 +112,10 @@ public class AlarmReceiver extends BroadcastReceiver {
         intentService.putExtra(NOTE, note);
         intentService.putExtra(USER_ID, user_id);
         intentService.putExtra(ALARM_ID, alarm_id);
+        intentService.putExtra(MEDICINE_ID, medicine_id);
 
         context.startService(intentService);
+
 
         boolean isRecurring = intent.getBooleanExtra(RECURRING,false);
         if (!isRecurring){
