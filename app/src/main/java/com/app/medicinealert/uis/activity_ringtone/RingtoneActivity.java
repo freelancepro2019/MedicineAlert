@@ -52,13 +52,19 @@ public class RingtoneActivity extends ActivityBase {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
         Window win = getWindow();
         win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_ringtone);
@@ -67,7 +73,7 @@ public class RingtoneActivity extends ActivityBase {
     }
 
     private void getDataFromIntent() {
-        Log.e("ringtone","ringtone");
+        Log.e("ringtone", "ringtone");
         Intent intent = getIntent();
         alarm_id = intent.getIntExtra(AlarmReceiver.ALARM_ID, 0);
         title = intent.getStringExtra(AlarmReceiver.TITLE);
@@ -79,16 +85,9 @@ public class RingtoneActivity extends ActivityBase {
     private void initView() {
         dataBase = MedicineAlertDataBase.newInstance(this);
         dao = dataBase.getDAO();
+        binding.setTitle(title);
+        binding.setDosage(dosage);
 
-       /* PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
-        if (mWakeLock == null) {
-            mWakeLock = pm.newWakeLock((PowerManager.FULL_WAKE_LOCK | PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), TAG);
-        }
-
-        if (!mWakeLock.isHeld()) {
-            mWakeLock.acquire(60 * 1000L);
-        }
-*/
         Uri uri = RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_ALARM);
         if (uri != null) {
             mp = MediaPlayer.create(this, uri);
@@ -106,7 +105,7 @@ public class RingtoneActivity extends ActivityBase {
     }
 
     private void insertReport() {
-        ReportModel model = new ReportModel(getUserModel().getUser_id(),medicine_id,title,Integer.parseInt(dosage),0,getNowDate());
+        ReportModel model = new ReportModel(getUserModel().getUser_id(), medicine_id, title, Integer.parseInt(dosage), 0, getNowDate());
         dao.insertReport(model)
                 .subscribeOn(Schedulers.computation())
                 .subscribe(new CompletableObserver() {
@@ -156,9 +155,9 @@ public class RingtoneActivity extends ActivityBase {
         disposable.clear();
     }
 
-    private String getNowDate(){
+    private String getNowDate() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("dd/MMM/yyyy",Locale.ENGLISH);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy", Locale.ENGLISH);
         return simpleDateFormat.format(calendar.getTime());
     }
 }
