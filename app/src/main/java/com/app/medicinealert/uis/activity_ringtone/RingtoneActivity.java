@@ -76,7 +76,6 @@ public class RingtoneActivity extends ActivityBase {
     }
 
     private void getDataFromIntent() {
-        Log.e("ringtone", "ringtone");
         Intent intent = getIntent();
         alarm_id = intent.getIntExtra(AlarmReceiver.ALARM_ID, 0);
         title = intent.getStringExtra(AlarmReceiver.TITLE);

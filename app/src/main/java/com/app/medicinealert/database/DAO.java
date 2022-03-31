@@ -34,7 +34,7 @@ public interface DAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable insertReport(ReportModel model);
 
-    @Query("SELECT * FROM table_report WHERE user_id=:user_id ")
+    @Query("SELECT * ,COUNT(*) AS total_amount FROM table_report WHERE user_id=:user_id GROUP BY dosage")
     Single<List<ReportModel>> getReports(String user_id);
 
 }
