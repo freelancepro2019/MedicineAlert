@@ -6,11 +6,13 @@ import androidx.databinding.DataBindingUtil;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
@@ -39,7 +41,7 @@ import io.reactivex.schedulers.Schedulers;
 public class RingtoneActivity extends ActivityBase {
     private ActivityRingtoneBinding binding;
     public final String TAG = this.getClass().getSimpleName();
-    private PowerManager.WakeLock mWakeLock;
+    private PowerManager.WakeLock wl;
     private MediaPlayer mp;
     private int alarm_id;
     private String title;
@@ -54,13 +56,14 @@ public class RingtoneActivity extends ActivityBase {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        Window win = getWindow();
-        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-
-        win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
     }
 
     @Override
@@ -82,7 +85,12 @@ public class RingtoneActivity extends ActivityBase {
         medicine_id = intent.getStringExtra(AlarmReceiver.MEDICINE_ID);
     }
 
+    @SuppressLint("InvalidWakeLockTag")
     private void initView() {
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Tag");
+        wl.acquire();
+
         dataBase = MedicineAlertDataBase.newInstance(this);
         dao = dataBase.getDAO();
         binding.setTitle(title);
@@ -135,16 +143,7 @@ public class RingtoneActivity extends ActivityBase {
         rotateAnimation.start();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mWakeLock != null && mWakeLock.isHeld()) {
-            mWakeLock.release();
-        }
-        if (mp != null) {
-            mp.pause();
-        }
-    }
+
 
     @Override
     protected void onDestroy() {
@@ -153,6 +152,7 @@ public class RingtoneActivity extends ActivityBase {
             mp.release();
         }
         disposable.clear();
+        wl.release();
     }
 
     private String getNowDate() {
@@ -160,4 +160,5 @@ public class RingtoneActivity extends ActivityBase {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy", Locale.ENGLISH);
         return simpleDateFormat.format(calendar.getTime());
     }
+
 }

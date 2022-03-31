@@ -41,7 +41,7 @@ public class AlarmService extends Service {
         Log.e("ring","fired");
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
-        wl.acquire();
+        wl.acquire(10*60*1000L /*10 minutes*/);
 
         int alarm_id = intent.getIntExtra(AlarmReceiver.ALARM_ID, 0);
         String title = intent.getStringExtra(AlarmReceiver.TITLE);
@@ -85,6 +85,7 @@ public class AlarmService extends Service {
                 .setChannelId(App.CHANNEL_ID)
                 .setContentTitle(medicine_name)
                 .setContentText(body)
+                .setFullScreenIntent(pendingIntent,true)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
